@@ -1,5 +1,13 @@
 # Security notes
 
+## Reporting a vulnerability
+
+Please don't open a public issue. Report it privately from the repository's
+**Security** tab → **Report a vulnerability**, with the steps to reproduce it and which
+part is affected (portal, dashboard, credit service, coin reader or network setup).
+
+## Keeping secrets out of the repository
+
 Never commit these (they're in `.gitignore` or not in the repository at all):
 
 - `/etc/pisowifi.env`: holds `PISOWIFI_ADMIN_TOKEN`, which controls the credit service.
