@@ -1,0 +1,74 @@
+name: Bug report
+description: Something in the portal, dashboard, coin reader or credit service isn't working right.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Check [docs/troubleshooting.md](https://github.com/shiroee/piso-wifi/blob/main/docs/troubleshooting.md) first; many problems are listed there with a fix.
+
+        **Never paste** `PISOWIFI_ADMIN_TOKEN`, the openNDS `faskey`, dashboard passwords, or `/etc/pisowifi.env`. Replace them with `REDACTED`.
+        Found a security problem? Don't open an issue: use **Security → Report a vulnerability**.
+  - type: dropdown
+    id: part
+    attributes:
+      label: Which part?
+      options:
+        - Customer portal (portal.py)
+        - Owner dashboard (dashboard.py)
+        - Coins / coin slot light (coin_reader.py)
+        - Credit, time, promos, vouchers (creditd.py)
+        - openNDS / network / firewall
+        - Install or update scripts
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, and what happened instead.
+      placeholder: |
+        1. Tapped Insert Coin on the phone
+        2. Dropped a ₱5 coin
+        3. Expected 50 min, the portal showed nothing and the coin went to "Not given to anyone"
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: The latest version in CHANGELOG.md on the Pi, or the output of `git rev-parse --short HEAD` in the repo.
+      placeholder: "2.9"
+    validations:
+      required: true
+  - type: dropdown
+    id: board
+    attributes:
+      label: Main board
+      options:
+        - Orange Pi PC
+        - Piso WiFi Main Board PC
+        - Other (say which below)
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: OS
+      description: Output of `cat /etc/os-release | head -2`
+      placeholder: Armbian Community, Debian 13 Trixie
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: |
+        The last lines from the service involved, for example:
+        `journalctl -u coin-reader -n 50 --no-pager`
+        (other services: `pisowifi-creditd`, `pisowifi-portal`, `pisowifi-dashboard`, `opennds`, `pisowifi-guard`)
+      render: text
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Screenshots, what changed recently (new coin slot, update, power cut), how often it happens.

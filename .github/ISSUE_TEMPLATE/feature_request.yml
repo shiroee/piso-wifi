@@ -1,0 +1,29 @@
+name: Feature request
+description: An idea for the portal, dashboard, rates, vouchers or hardware support.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: Who it's for (customers or the owner) and what's hard or missing today.
+      placeholder: As the owner, I can't see which day of the week earns the most...
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Anything you've tried or other ways to do it?
+  - type: checkboxes
+    id: help
+    attributes:
+      label: Can you help?
+      options:
+        - label: I can test it on my machine
+        - label: I'd like to send a pull request

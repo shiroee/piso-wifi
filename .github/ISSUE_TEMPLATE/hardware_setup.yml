@@ -1,0 +1,66 @@
+name: Hardware or setup help
+description: Wiring, coin slot, access point, install guide or openNDS setup questions.
+labels: [question]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Worth checking first: [docs/hardware.md](https://github.com/shiroee/piso-wifi/blob/main/docs/hardware.md) (parts, pins, safety),
+        [docs/install-guide.md](https://github.com/shiroee/piso-wifi/blob/main/docs/install-guide.md) and
+        [docs/troubleshooting.md](https://github.com/shiroee/piso-wifi/blob/main/docs/troubleshooting.md).
+
+        **Never paste** `PISOWIFI_ADMIN_TOKEN`, the openNDS `faskey` or passwords. Replace them with `REDACTED`.
+  - type: dropdown
+    id: topic
+    attributes:
+      label: What do you need help with?
+      options:
+        - Coin slot wiring or coins not counting
+        - Coin slot light (CS LED)
+        - Power / 12 V adapter
+        - Access point (TP-Link EAP110 or other)
+        - USB-to-LAN adapter / customer network
+        - openNDS / captive portal not showing
+        - Following the install guide
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+      description: What you're trying to do, which step you're on, and what you see.
+    validations:
+      required: true
+  - type: dropdown
+    id: board
+    attributes:
+      label: Main board
+      options:
+        - Orange Pi PC
+        - Piso WiFi Main Board PC
+        - Other (say which below)
+    validations:
+      required: true
+  - type: dropdown
+    id: coinslot
+    attributes:
+      label: Coin slot
+      options:
+        - Allan Universal Coinslot (RED CS GND)
+        - Allan Coinslot RGB Rim (GND STD)
+        - Other (say which below)
+        - Not using one yet
+  - type: textarea
+    id: wiring
+    attributes:
+      label: Wiring and photos
+      description: Which connector each wire goes to on the custom board, the coin slot's speed switch setting, and photos if you can. Drag images in here.
+  - type: textarea
+    id: output
+    attributes:
+      label: Command output
+      description: |
+        Anything you've run, for example:
+        `ndsctl status | head -20`, `ip -br addr`, `journalctl -u coin-reader -n 50 --no-pager`
+      render: text
