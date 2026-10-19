@@ -1,0 +1,22 @@
+[Unit]
+Description=Free Piso WiFi customer portal (openNDS sends unpaid phones here)
+After=network-online.target pisowifi-creditd.service opennds.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/pisowifi.env
+ExecStart=/opt/pisowifi-venv/bin/python /opt/pisowifi/portal.py
+# Binds to the customer LAN address, which can appear late at boot; keep retrying.
+Restart=always
+RestartSec=5
+# Customer-facing, so it runs as a throwaway user with a read-only system.
+# It only needs to read /proc/net/arp and reach creditd on localhost.
+DynamicUser=yes
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+
+[Install]
+WantedBy=multi-user.target

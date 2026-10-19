@@ -1,0 +1,23 @@
+[Unit]
+Description=Free Piso WiFi owner dashboard (port 8091, home network only)
+After=network-online.target pisowifi-creditd.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+# PISOWIFI_ADMIN_TOKEN and PISOWIFI_PORT reach creditd; PISOWIFI_DASHBOARD_* set the port.
+EnvironmentFile=/etc/pisowifi.env
+WorkingDirectory=/opt/pisowifi
+ExecStart=/opt/pisowifi-venv/bin/python /opt/pisowifi/dashboard.py
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=full
+ReadWritePaths=/var/lib/pisowifi
+
+[Install]
+WantedBy=multi-user.target

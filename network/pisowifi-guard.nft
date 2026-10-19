@@ -1,0 +1,21 @@
+# Keep customers on the Piso WiFi LAN away from the Orange Pi's admin services:
+# SSH (22), the credit service (8090) and the owner dashboard (8091).
+# openNDS rebuilds its own nds_* tables on every start and always allows SSH,
+# so this lives in a separate table that openNDS never touches. A drop here wins
+# over an accept in openNDS's table. Change the interface name if yours differs.
+# Install: sudo install -m 0644 network/pisowifi-guard.nft /etc/pisowifi-guard.nft
+add table inet pisowifi_guard
+delete table inet pisowifi_guard
+table inet pisowifi_guard {
+    chain input {
+        type filter hook input priority 0; policy accept;
+        iifname "enx00e099004abb" tcp dport { 22, 8090, 8091 } counter drop
+    }
+    # Short address for customers: http://piso.wifi (dnsmasq points the name at
+    # 10.20.0.1) reaches the portal on port 2080 without typing the port. Runs
+    # before openNDS's own port-80 redirect (priority -110 vs dstnat -100).
+    chain short_name {
+        type nat hook prerouting priority -110; policy accept;
+        iifname "enx00e099004abb" ip daddr 10.20.0.1 tcp dport 80 counter redirect to :2080
+    }
+}

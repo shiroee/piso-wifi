@@ -1,0 +1,23 @@
+[Unit]
+Description=Free Piso WiFi credit/session prototype
+After=network-online.target opennds.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+EnvironmentFile=/etc/pisowifi.env
+WorkingDirectory=/opt/pisowifi
+ExecStart=/opt/pisowifi-venv/bin/python /opt/pisowifi/creditd.py
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+# No PrivateTmp: ndsctl talks to openNDS through /tmp/ndsctl.sock, which a
+# private /tmp would hide (the dashboard's connected-devices list needs it).
+ProtectHome=true
+ProtectSystem=full
+ReadWritePaths=/var/lib/pisowifi
+
+[Install]
+WantedBy=multi-user.target

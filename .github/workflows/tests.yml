@@ -1,0 +1,27 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install flask
+      - name: Coin reader
+        working-directory: coin
+        run: python -m unittest -v test_coin_reader
+      - name: Credit service
+        working-directory: app
+        run: python -m unittest -v test_creditd
+      - name: Customer portal
+        working-directory: portal
+        run: python -m unittest -v test_portal
+      - name: Owner dashboard
+        working-directory: admin
+        run: python -m unittest -v test_dashboard

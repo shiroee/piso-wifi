@@ -1,0 +1,37 @@
+# Acceptance test checklist
+
+- [ ] Boot reliably from cold power and after reboot.
+- [ ] WAN gets an address and can reach the internet.
+- [ ] USB LAN uses a separate subnet; no WAN/LAN bridge.
+- [ ] DHCP serves only the customer LAN.
+- [ ] EAP110 clients get customer subnet addresses.
+- [ ] Customer cannot access upstream router admin IP or dashboard.
+- [ ] openNDS captive portal appears on Android/iOS/Windows test clients.
+- [ ] Free/unauthorized clients cannot browse past the portal.
+- [ ] Test credit ledger records exactly once per test event.
+- [ ] openNDS authorization succeeds only for the intended client MAC.
+- [ ] Expiry/revocation blocks access at the configured deadline.
+- [ ] Isolated coin interface pulse counts match inserted coins over repeated tests.
+- [ ] Power interruption during pulse does not duplicate credit.
+- [ ] Coins go only to the customer who tapped Insert Coin; a second customer gets "busy".
+- [ ] A coin inserted with no Insert Coin window shows up in `unassigned_coin_pesos`.
+- [ ] Stopping `pisowifi-creditd`, inserting coins, then starting it again credits each coin exactly once.
+- [ ] WAN outage and recovery behave safely.
+- [ ] Run a 24-hour stability test before making a disk image.
+- [ ] Dashboard opens from the home network and is blocked from the customer Wi-Fi (also SSH and port 8090).
+- [ ] A rate changed on the dashboard is still in effect after `systemctl restart pisowifi-creditd` and after a reboot.
+- [ ] Dashboard takings match the coins actually inserted over a day.
+- [ ] A new phone on the Wi-Fi sees the Piso WiFi portal, not openNDS's "Click to Continue" page.
+- [ ] Insert coin, ₱5, Start my time: the phone browses for 25 minutes, then is cut off.
+- [ ] Adding ₱10 while online adds 50 minutes to the time left.
+- [ ] Inserting coins and walking away still starts the time once the slot closes.
+- [ ] After a reboot, a customer with time left is back online within a minute.
+- [ ] With a 2 Mbps download limit set, a phone's speed test shows about 2 Mbps.
+- [ ] With a ₱10 = 70 min promo, inserting ₱5 twice in one go gives 70 minutes.
+- [ ] Pause stops the internet and the timer; resume an hour later gives back the same time.
+- [ ] A printed voucher works once, on one phone; a cancelled batch doesn't work.
+- [ ] Five wrong voucher codes lock that phone out for 10 minutes.
+- [ ] Tapping Insert coin 3 times without a coin blocks a 4th tap for 5 minutes.
+- [ ] Giving an unassigned coin to a phone from the dashboard puts that phone online.
+- [ ] A new name saved on the dashboard shows on the customer page within 30 seconds and on new printed vouchers.
+- [ ] The coin slot light turns on after tapping Insert Coin, blinks twice per coin, and turns off when the slot closes.

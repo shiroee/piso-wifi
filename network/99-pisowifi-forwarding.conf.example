@@ -1,0 +1,2 @@
+# /etc/sysctl.d/99-pisowifi-forwarding.conf — let the Pi pass customer traffic to the WAN.
+net.ipv4.ip_forward=1

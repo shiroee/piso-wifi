@@ -1,0 +1,17 @@
+# /etc/config/opennds — the settings that work on Orange Pi PC + Armbian (openNDS 10.3.1).
+# openNDS on Armbian reads this OpenWrt-style file, not /etc/opennds/opennds.conf.
+# Change the interface name to your USB Ethernet adapter's (see `ip -br link`).
+config opennds 'opennds'
+    option gatewayinterface 'enx00e099004abb'
+    option debuglevel '1'
+    # Customers may reach only DNS and DHCP on the Pi, plus the portal (2080).
+    # openNDS adds SSH (22) and 443 by itself; network/pisowifi-guard.nft blocks SSH.
+    list users_to_router 'allow tcp port 53'
+    list users_to_router 'allow udp port 53'
+    list users_to_router 'allow udp port 67'
+    list users_to_router 'allow tcp port 2080'
+    # Send unpaid phones to the Piso WiFi portal (portal/portal.py) instead of
+    # openNDS's own free "Click to Continue" page.
+    option fasport '2080'
+    option faspath '/'
+    # openNDS also has a `faskey` secret. The portal doesn't use it; never commit it.

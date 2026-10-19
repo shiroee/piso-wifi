@@ -1,0 +1,13 @@
+# EXAMPLE for a new board; the working unit on your Pi may differ (collect it first).
+[Unit]
+Description=Free Piso WiFi NAT for the customer LAN
+After=network-pre.target
+Before=opennds.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/sbin/nft -f /etc/pisowifi-nat.nft
+
+[Install]
+WantedBy=multi-user.target

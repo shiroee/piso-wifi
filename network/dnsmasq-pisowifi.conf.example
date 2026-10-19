@@ -1,0 +1,15 @@
+# /etc/dnsmasq.d/pisowifi.conf — DHCP and DNS for the customer LAN only.
+# EXAMPLE matching the working setup (range, lease time, upstream DNS seen in its logs).
+interface=enx00e099004abb
+bind-interfaces
+dhcp-range=10.20.0.50,10.20.0.200,255.255.255.0,4h
+dhcp-option=option:router,10.20.0.1
+dhcp-option=option:dns-server,10.20.0.1
+no-resolv
+server=1.1.1.1
+server=9.9.9.9
+domain-needed
+bogus-priv
+# openNDS puts "status.client" in its portal address; the short customer address is piso.wifi.
+address=/status.client/10.20.0.1
+address=/piso.wifi/10.20.0.1

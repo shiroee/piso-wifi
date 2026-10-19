@@ -1,0 +1,23 @@
+[Unit]
+Description=Free Piso WiFi coin reader (gpiochip0 line 12 = header pin 3)
+After=network-online.target pisowifi-creditd.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+# Same settings file as pisowifi-creditd: PISOWIFI_ADMIN_TOKEN and PISOWIFI_PORT.
+EnvironmentFile=/etc/pisowifi.env
+# System Python, because python3-libgpiod comes from apt, not from the venv.
+ExecStart=/usr/bin/python3 /opt/pisowifi/coin_reader.py
+Restart=always
+RestartSec=2
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=full
+ReadWritePaths=/var/lib/pisowifi
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,12 @@
+# /etc/netplan/<name>.yaml — WAN by DHCP, customer LAN static.
+# EXAMPLE: compare with the working file on your Pi (scripts/collect-live-config.sh)
+# before using it on a new board. Apply with `netplan try` from a console, not SSH over the LAN.
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    end0:                      # built-in Ethernet -> your home router (WAN)
+      dhcp4: true
+    enx00e099004abb:           # USB Ethernet -> access point (customer LAN)
+      dhcp4: false
+      addresses: [10.20.0.1/24]

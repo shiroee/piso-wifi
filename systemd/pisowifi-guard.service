@@ -1,0 +1,11 @@
+[Unit]
+Description=Block admin ports from the Piso WiFi customer LAN
+Before=opennds.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/sbin/nft -f /etc/pisowifi-guard.nft
+
+[Install]
+WantedBy=multi-user.target

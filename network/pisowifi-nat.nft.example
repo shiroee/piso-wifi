@@ -1,0 +1,12 @@
+# /etc/pisowifi-nat.nft — share the WAN connection with the customer LAN.
+# EXAMPLE: your board already has a working pisowifi-nat.service; collect it with
+# scripts/collect-live-config.sh rather than replacing it. Needs IP forwarding on
+# (network/99-pisowifi-forwarding.conf.example).
+add table inet pisowifi_nat
+delete table inet pisowifi_nat
+table inet pisowifi_nat {
+    chain postrouting {
+        type nat hook postrouting priority srcnat; policy accept;
+        oifname "end0" ip saddr 10.20.0.0/24 masquerade
+    }
+}
