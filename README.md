@@ -67,6 +67,24 @@ flowchart LR
 | `docs/` | Install guide, hardware, rates, operations, troubleshooting, API, test plan |
 | `tools/print-materials/` | Regenerates the printed step pages and tarpaulin from the real portal |
 
+## Parts list (where to buy)
+
+Shopee PH links for the parts this build uses. Pins, wiring and safety notes are in
+[docs/hardware.md](docs/hardware.md).
+
+| Part | Notes | Link |
+|---|---|---|
+| Piso WiFi custom board | Interface board (hat) for the Orange Pi PC | [Shopee](https://s.shopee.ph/4B0qEmqxQu) |
+| Orange Pi PC | The computer | [Shopee](https://s.shopee.ph/8AWz0FvJV4) |
+| Piso WiFi Main Board PC | Alternative to the Orange Pi PC | [Shopee](https://s.shopee.ph/5AtNR5flci) |
+| 12 V 5 A adapter | Powers the custom board, which feeds the Pi | [Shopee](https://s.shopee.ph/9zydBgRkbi) |
+| TP-Link EAP110 | Access point, set to Access Point / Bridge mode | [Shopee](https://s.shopee.ph/1qcvSnXKrS) |
+| Allan Coinslot RGB Rim | Wires to **GND STD** on the custom board | [Shopee](https://s.shopee.ph/1gJVGXs8cw) |
+| Allan Universal Coinslot | Wires to **RED CS GND** on the custom board | [Shopee](https://s.shopee.ph/9V2MayoWhP) |
+| USB 3.0 to LAN (100 Mbps RJ45) | Customer network port | [Shopee](https://s.shopee.ph/2BFlrcvXqK) |
+| Coin slot LED light | Lights when inserting coins; wires to **CS LED** on the custom board (PA11, `gpiochip0` line 11) | [Shopee](https://s.shopee.ph/4LKGRgJmJv) |
+| Comlock (cam lock) | For the coin slot box | [Shopee](https://s.shopee.ph/9KiwOvqGAL) |
+
 ## Getting started
 
 1. Read [docs/hardware.md](docs/hardware.md) (parts, pins, safety).
